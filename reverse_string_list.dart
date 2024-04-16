@@ -67,7 +67,6 @@ reverseVowels(String stringValue){
       temp = chars[start];
       chars[start]= chars[end];
       chars[end] =temp;
-
       start++;
       end--;
     }else if(vowels.contains(chars[start])){

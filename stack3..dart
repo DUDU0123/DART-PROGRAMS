@@ -13,7 +13,7 @@ void main() {
   // removeVowels(name);
 
   String c = "()[]{}"; //"()[]{}"  "()"
-  print(isValid(c));
+  print(isPalindrome('Apple'));
 }
 
 findNextGreater({required List list}) {
@@ -71,6 +71,7 @@ makeParanthesisValid({required String value}) {
 
 removeVowels(String name){
   List vowels = ['a','e','i','o','u','A','E','I','O','U'];
+  
   List stack = [];
   List value =name.split('');
   for (var i = 0; i < value.length; i++) {
@@ -126,3 +127,58 @@ bool valid(String s){
     }
     return stack.isEmpty;
 }
+
+// if n is 1: happy number
+bool isHappyy(int n) {
+    int sum = 0;
+    if(n == 1) {
+        return true;
+    } else if(n <= 0) {
+        return false;
+    }
+    Set<int> seen = {}; // Keep track of seen sums to detect cycles
+    while(sum != 1 && !seen.contains(sum)) {
+        sum = 0;
+        seen.add(n);
+        String numStr = n.toString();
+        for(int i = 0; i < numStr.length; i++) {
+            int digit = int.parse(numStr[i]);
+            sum += digit * digit;
+        }
+        n = sum; // Update n for the next iteration
+    }
+    return sum == 1;
+}
+
+bool isHappy(int n) {
+
+    int sum = 0;
+    if(n==1){
+        return true;
+    }else if(n<=0){
+        return false;
+    }else if(n==4){
+        return false;
+    }
+    while(n>0){
+     
+        int digit = n%10;
+        sum = sum+(digit * digit);
+        n= n~/10;
+    }
+    return isHappy(sum);
+  }
+
+  bool isPalindrome(String s) {
+    int flag = 0;
+    s.replaceAll(RegExp(r'[,\s]'),'');
+    for(int i = 0;i<s.length/2;i++){
+        if(s[i]!=s[s.length-1-i]){
+            flag = 1;
+        }
+    }
+    if(flag==0){
+      return true;
+    }
+    return false;
+  }
